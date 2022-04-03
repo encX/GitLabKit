@@ -48,18 +48,3 @@ jobs:
 
       - run: yarn
       - run: yarn lint
-
-
-  build-docker:
-    needs: [api-unit-test, client-lint]
-    runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: src
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Build Docker image
-        run: docker build . --file GitLabKit.Runner.Web/Dockerfile

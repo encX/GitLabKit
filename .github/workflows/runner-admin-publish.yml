@@ -1,0 +1,53 @@
+name: "[Runner Admin] Build & Publish docker image"
+
+on:
+  push:
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  IMAGE_NAME: encx/gitlabkit-runner
+  PUSH: ${{ github.event_name != 'pull_request' }}
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: src
+
+    env:
+      TAG: ${{ github.event.release.tag_name }}
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Login to Docker Hub
+      if: ${{ env.PUSH }}
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Docker meta
+      id: meta
+      uses: docker/metadata-action@v3
+      with:
+        images: ${{ env.IMAGE_NAME }}
+        tags: |
+          type=semver,pattern={{version}}
+          type=semver,pattern={{major}}.{{minor}}
+          type=semver,pattern={{major}}
+          type=ref,event=branch
+          type=sha
+
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        context: src
+        file: GitLabKit.Runner.Web/Dockerfile
+        push: ${{ env.PUSH }}
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
