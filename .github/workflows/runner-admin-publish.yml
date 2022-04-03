@@ -36,7 +36,7 @@ jobs:
           type=sha
         labels: |
           org.opencontainers.image.title=GitLabKit Runner
-          org.opencontainers.image.description": Tools for GitLab to help you visualize and manage self-hosted runners with ease
+          org.opencontainers.image.description=Tools for GitLab to help you visualize and manage self-hosted runners with ease
           org.opencontainers.image.licenses=MIT
 
     - name: Build and push
