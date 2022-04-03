@@ -11,7 +11,7 @@ const JobDisplay: React.FC<JobDisplayProps> = ({ jobs, className }) => {
   if (Array.isArray(jobs) && jobs.length === 0) return <div className={className}>idle</div>;
   if (Array.isArray(jobs) && jobs.length > 1) return <div className={className}>running {jobs.length} jobs</div>;
 
-  const job = Array.isArray(jobs) ? jobs[1] : jobs;
+  const job = Array.isArray(jobs) ? jobs[0] : jobs;
   return (
     <div className={className}>
       {job.project.name} =&gt; {job.name}
