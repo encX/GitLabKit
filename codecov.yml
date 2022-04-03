@@ -1,0 +1,16 @@
+codecov:
+  notify:
+    require_ci_to_pass: no
+
+coverage:
+  precision: 2
+  round: down
+  range: "10...100"
+  status:
+    patch:
+      default:
+        target: 70
+
+#  fixes:
+#  you will need to work out the teamcity ID manually and apply this fix 
+#    - "buildAgent/work/46a57058f1cda8e2/::"
