@@ -1,10 +1,8 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY NuGet.config ./
 COPY *.sln ./
 COPY ["GitLabKit.Runner.Web/GitLabKit.Runner.Web.csproj", "GitLabKit.Runner.Web/"]
 COPY ["GitLabKit.Runner.Core/GitLabKit.Runner.Core.csproj", "GitLabKit.Runner.Core/"]
-COPY docker-compose.dcproj ./
 RUN dotnet restore "GitLabKit.Runner.Web/GitLabKit.Runner.Web.csproj"
 COPY . .
 WORKDIR /src/GitLabKit.Runner.Web
