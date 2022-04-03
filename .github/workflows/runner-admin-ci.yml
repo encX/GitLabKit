@@ -1,0 +1,50 @@
+name: "[Runner Admin] CI"
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  api-unit-test:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: src
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - run: >-
+          docker run
+          -v $(pwd):/src
+          -w /src
+          mcr.microsoft.com/dotnet/sdk:6.0-bullseye-slim
+          dotnet test 
+          GitLabKit.Runner.UnitTests/GitLabKit.Runner.UnitTests.csproj
+          --no-build 
+          --collect:"XPlat Code Coverage"
+
+
+  client-lint:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: src/clientside
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '16.x'
+
+      - name: Cache node_modules
+        uses: actions/cache@v1
+        with:
+          path: src/clientside/node_modules
+          key: gk-gra-yarn-${{ hashFiles('src/clientside/yarn.lock') }}
+          restore-keys: gk-gra-yarn-
+
+      - run: yarn
+      - run: yarn lint
