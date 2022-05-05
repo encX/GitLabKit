@@ -288,14 +288,7 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 swagger.json
-nuget.exe
-app_settings_backup.config
-output
-/.build/swagger.json
-Logs
-/SQL/log.txt
 
-# Consul local cache
-/**/consul-config.json
+.DS_Store
 
 appsettings.Secrets.json
