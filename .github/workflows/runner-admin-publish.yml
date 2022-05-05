@@ -5,6 +5,7 @@ on:
     tags: [ 'v*' ]
   pull_request:
     branches: [ main ]
+    paths: [ "src/**" ]
 
 env:
   IMAGE_NAME: encx/gitlabkit-runner

@@ -3,6 +3,7 @@ name: "[Runner Admin] CI"
 on:
   pull_request:
     branches: [ main ]
+    paths: [ "src/**" ]
 
 jobs:
   api-unit-test:
