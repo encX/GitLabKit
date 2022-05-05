@@ -29,7 +29,7 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="text-center">
-      <h1 className="text-6xl font-bold mb-8">GitLab Runner Admin</h1>
+      <h1 className="text-6xl font-bold mb-8">GitLabKit Runner Admin</h1>
 
       <input
         className="p-2 w-96 text-5xl rounded-lg bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 outline-none"
