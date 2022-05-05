@@ -20,7 +20,7 @@ const GroupPage: React.FC<StoreProps> = ({ mobXStore }) => {
   const pageTitle = () => {
     if (groupInfo === undefined) return 'Fetching...';
     if (groupInfo === null) return 'Group not found!';
-    return `GitLab runners on ${groupInfo?.name}`;
+    return `Runners in ${groupInfo?.name}`;
   };
 
   useEffect(() => {
