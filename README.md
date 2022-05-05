@@ -74,15 +74,12 @@ This helps reduce loads to server and improve user experience.
 #### Run!
 GitLabKit Runner Admin is published as a [docker image](https://hub.docker.com/r/encx/gitlabkit-runner).
 
-You can try running by 2 docker commands
-```shell
-$ docker run -p 16379:6379 redis
-```
+You can try running by using `docker run`
 ```shell
 $ docker run \
   -e CONNECTIONS__GITLABSERVER="https://<your-gitlab-server>" \
   -e SECRETS__GITLABTOKEN="<gitlab-token>" \
-  -e CONNECTIONS__REDISSERVER="localhost:16379" \
+  -e CONNECTIONS__REDISSERVER="<redis-host>" \
   -p 80:80 \
   encx/gitlabkit-runner
 ```
