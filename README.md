@@ -7,31 +7,31 @@
 Better way to see and control your GitLab self-hosted runners.
 
 ### Why?
-Take a look at current GitLab runner page in group's CI/CD settings.
-You can see all runner names and basic infomation but that's it.
-You can rename runners, pause/resume/delete them only individually.
+Take a look at current GitLab runner page in group's CI/CD settings.  
+You can see all runner names and basic information but that's it.  
+You can rename runners, pause/resume/delete them only individually.  
 Most importantly, it could only display 4 runners at a time. (as of version 14.10)
 
 Some organizations might have 100+ runners and want to take actions
-with all of them or at least runners with some specific tags at once.
-Some also embrace ephemeral runners where they are periodically destroyed and respawned. 
-This helps mitigate "state drift" issue on servers.
-*(The state drift issue might be addressed by using docker runner but some still prefer VM/baremetal runner
+with all of them or at least runners with some specific tags at once.  
+Some also embrace ephemeral runners where they are periodically destroyed and respawned.
+This helps mitigate "state drift" issue on servers.  
+*(The state drift issue might be addressed by using docker runner but some still prefer VM/baremetal runners
 for performance gain or job startup time.)*
 
-Status report is another area that's missing.
-GitLab doesn't display if a runner is running a job or being idle.
+Status report is another area that's missing.  
+GitLab doesn't display if a runner is running a job or being idle.  
 Let alone job history for each runner that could help identifying faulty runners.
 
 GitLabKit Runner Admin can help improve experience of managing runners.
 
-### How to use?
+### How?
 #### Main page
 Put your group ID in text box and hit enter to go to group page. Simple enough.
 ![main-page](/doc/images/main-page.png)
 
 #### Group page
-Displays all runner in the group
+Displays all runners in the group
 - Orange row = Runner is running a job (job displayed on far right)
 - Red row = Runner is offline
 - Use the toggle in front of runner name to individually enable/disable it
@@ -40,15 +40,15 @@ Displays all runner in the group
 ![group-page](/doc/images/group-page.png)
 
 ##### Filters!
-You could filter runners by tags, online status and active/paused status.
-Filters can be combined too! 
-And number in parentheses show you runner counts for that tag/status given current active filter criteria.
+You could filter runners by tags, online status and active/paused status.  
+And number in parentheses show you runner counts for that tag/status given current active filter criteria.  
+Filters can be combined too!  
 
 ##### Sort
 Simple enough
 
 ##### Action buttons
-At the bottom of group page you can take action on runners being displayed.
+At the bottom of group page you can take action on runners being displayed.  
 So you can filter with some criteria and enable, disable or delete them.
 
 ![group-page-in-action](/doc/images/group-page-in-action.gif)
@@ -68,7 +68,8 @@ From group page, click on any runner name to see its job history.
 
 ### Installation
 #### Prerequiresite
-GitLabKit Runner Admin requires `redis` for caching result from GitLab server. This helps reduce loads to server and improve user experience.
+GitLabKit Runner Admin requires `redis` for caching result from GitLab server.  
+This helps reduce loads to server and improve user experience.
 
 #### Run!
 GitLabKit Runner Admin is published as a [docker image](https://hub.docker.com/r/encx/gitlabkit-runner).
@@ -123,8 +124,8 @@ Settings could be passed to Runner Admin's container using these environment var
 ---
 
 ## Module: REST API Client (coming soon)
-Full suite GitLab REST API client.
-No more manual HTTP clients.
+Full suite GitLab REST API client.  
+No more manual HTTP clients.  
 
 Will be available on .net, TypeScript, JVM languages and more.
 
