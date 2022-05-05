@@ -1,7 +1,9 @@
 <h1 align="center">GitLabKit</h1>
 <p align="center">Toolkit for GitLab server admins and GitLab feature developers!</p>
 
-## Runner Admin
+---
+
+## Module: Runner Admin
 Better way to see and control your GitLab self-hosted runners.
 
 ### Why?
@@ -30,8 +32,8 @@ Put your group ID in text box and hit enter to go to group page. Simple enough.
 
 #### Group page
 Displays all runner in the group
-- Orange row mean the runner is running a job displaying on the right
-- Red row mean the runner is offline
+- Orange row = Runner is running a job (job displayed on far right)
+- Red row = Runner is offline
 - Use the toggle in front of runner name to individually enable/disable it
 - Click on job name on the right to navigate back to job page on GitLab
 - Click on runner name for runner history page
@@ -40,7 +42,7 @@ Displays all runner in the group
 ##### Filters!
 You could filter runners by tags, online status and active/paused status.
 Filters can be combined too! 
-And number in brackets show you runner counts for that tag/status given current active filter criteria.
+And number in parentheses show you runner counts for that tag/status given current active filter criteria.
 
 ##### Sort
 Simple enough
@@ -58,7 +60,7 @@ From group page, click on any runner name to see its job history.
 - Red row = Failed job
 - Orange row = Running job
 - Neutral row = Cancelled job
-- Time in bracket on the far left = Job duration
+- Time in parentheses on the far right = Job duration
 - Click on job name on the right to navigate back to job page on GitLab
 
 ![runner-page](/doc/images/runner-page.png)
@@ -120,7 +122,7 @@ Settings could be passed to Runner Admin's container using these environment var
 
 ---
 
-## REST API Client (coming soon)
+## Module: REST API Client (coming soon)
 Full suite GitLab REST API client.
 No more manual HTTP clients.
 

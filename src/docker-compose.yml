@@ -8,10 +8,19 @@ services:
       context: .
       dockerfile: GitLabKit.Runner.Web/Dockerfile
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:80
+      - CONNECTIONS__GITLABSERVER=http://gitlab-mock:80
+      - CONNECTIONS__REDISSERVER=redis:6379
+      - SECRETS__GITLABTOKEN=aaaaaaaaaaaaaaaaaaaa
     ports:
-      - "80:80"
+      - "8888:80"
+
+  gitlab-mock:
+    image: gitlab-mock
+    build:
+      context: .
+      dockerfile: GitLabKit.Runner.Mock/Dockerfile
+    ports:
+      - "9999:80"
 
   redis:
     image: redis
