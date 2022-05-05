@@ -1,10 +1,9 @@
 version: '3.8'
 
 # For local development only
-# See ops/* for k8s deployment configs
 services:
-  gitlab-runner-admin:
-    image: gitlab-runner-admin
+  gitlabkit-runner-admin:
+    image: gitlabkit-runner-admin
     build:
       context: .
       dockerfile: GitLabKit.Runner.Web/Dockerfile
@@ -12,7 +11,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
     ports:
-      - "58687:80"
+      - "80:80"
 
   redis:
     image: redis

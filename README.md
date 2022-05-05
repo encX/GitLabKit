@@ -65,16 +65,58 @@ From group page, click on any runner name to see its job history.
 
 
 ### Installation
+#### Prerequiresite
+GitLabKit Runner Admin requires `redis` for caching result from GitLab server. This helps reduce loads to server and improve user experience.
+
+#### Run!
 GitLabKit Runner Admin is published as a docker image.
-You can try running it by docker command
+
+You can try running by 2 docker commands
 ```shell
-docker run \
--p 80:80 \
+$ docker run -p 16379:6379 redis
 ```
-or docker-compose file
+```shell
+$ docker run \
+  -e CONNECTIONS__GITLABSERVER="https://<your-gitlab-server>" \
+  -e SECRETS__GITLABTOKEN="<gitlab-token>" \
+  -e CONNECTIONS__REDISSERVER="localhost:16379" \
+  -p 80:80 \
+  encx/gitlabkit-runner
+```
+
+or `docker-compose` file
 ```yaml
+version: '3.8'
+
+services:
+  gitlabkit-runner-admin:
+    image: encx/gitlabkit-runner
+    environment:
+      - CONNECTIONS__GITLABSERVER="https://<your-gitlab-server>"
+      - SECRETS__GITLABTOKEN="<gitlab-token>"
+      - CONNECTIONS__REDISSERVER="redis:6379"
+      - ASPNETCORE_URLS=http://+:80
+    ports: ["80:80"]
+
+  redis:
+    image: redis
+    ports: [6379]
 ```
+
+of course, you could also run this in Kubernetes environment and have multiple pods of it since the Runner Admin doesn't hold any state.
+
+
 #### Configuration
+Settings could be passed to Runner Admin's container using these environment variables
+
+| variable | example | required | description |
+|---|---|---|---|
+| `CONNECTIONS__GITLABSERVER` | `https://gitlab.yourcompany.com` | yes | GitLab server URL |
+| `CONNECTIONS__REDISSERVER` | `redis-server:16379` | yes | Redis host |
+| `SECRETS__GITLABTOKEN` | `rG2f93ddaz` | yes | GitLab token. Could be a personal token or group token that has sufficient permission to view CI/CD settings in the group |
+| `LOGTARGETS__SEQ` | `http://seq-server:5341` | no | Runner Admin supports [Seq](https://datalust.co/seq) logger. Use this to set log ingestion URL. |
+| `APPLICATIONINSIGHTS__CONNECTIONSTRING` | - | no | Runner Admin supports [Application Insights](https://docs.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview) to see application diagnostics. Use this to set connection string from Azure dashboard. |
+
 
 ---
 
