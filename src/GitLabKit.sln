@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitLabKit.Runner.Core", "Gi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitLabKit.Runner.UnitTests", "GitLabKit.Runner.UnitTests\GitLabKit.Runner.UnitTests.csproj", "{C17C5CFF-2A88-43AA-B87F-A25EA6203C66}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitLabKit.Runner.Mock", "GitLabKit.Runner.Mock\GitLabKit.Runner.Mock.csproj", "{0E2FF5C3-6C96-42BC-B0EA-339C44BDC047}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,11 +29,20 @@ Global
 		{C17C5CFF-2A88-43AA-B87F-A25EA6203C66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C17C5CFF-2A88-43AA-B87F-A25EA6203C66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C17C5CFF-2A88-43AA-B87F-A25EA6203C66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E2FF5C3-6C96-42BC-B0EA-339C44BDC047}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E2FF5C3-6C96-42BC-B0EA-339C44BDC047}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E2FF5C3-6C96-42BC-B0EA-339C44BDC047}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E2FF5C3-6C96-42BC-B0EA-339C44BDC047}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FF0A0519-A70F-45CD-B9BF-36F09DD3CF51}
+	EndGlobalSection
+	GlobalSection(RiderSharedRunConfigurations) = postSolution
+		File = .run\GitLabKit.Runner.Mock_ Mock.run.xml
+		File = .run\Serve & Mock.run.xml
+		File = .run\GitLabKit.Runner.Web_ Dev.run.xml
 	EndGlobalSection
 EndGlobal
