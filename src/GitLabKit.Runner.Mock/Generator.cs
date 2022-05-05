@@ -17,22 +17,28 @@ public static class Generator
             Id = runnerId,
             Description = $"test-runner-{runnerId}",
             IpAddress = $"10.1.1.{runnerId % 255}",
-            Active = runnerId % 2 == 0,
-            Online = runnerId % 3 == 0,
-            ContactedAt = DateTime.Now
+            Active = runnerId % 7 != 0,
+            Online = runnerId % 15 != 0,
+            ContactedAt = DateTime.Now,
+            TagList = new List<string>{runnerId < 2010 ? "windows" : "linux", $"tag-{runnerId % 3 + 1}"}
         };
 
-    public static Job GetMockJob(int seed, string status) =>
-        new()
+    public static Job GetMockJob(int jobId, string status)
+    {
+        var startTime = DateTime.Now.Subtract(TimeSpan.FromSeconds(new Random().Next(15 * 60, 120 * 60)));
+        var finishTime = DateTime.Now.Subtract(TimeSpan.FromSeconds(new Random().Next(0, 15 * 60)));
+        
+        return new Job
         {
-            Id = seed + 1,
+            Id = jobId,
             Status = status,
             Name = "build",
-            Ref = $"merge/{seed << 1 % 100}",
-            StartedAt = DateTime.Now.Subtract(TimeSpan.FromMinutes(seed % 10 + 5)),
-            Duration = (seed << 2) % 500 << 1,
+            Ref = $"merge/{new Random().Next(1, 9999)}",
+            StartedAt = startTime,
+            Duration = (finishTime - startTime).TotalSeconds,
             WebUrl = "https://gitlab.com",
-            FinishedAt = status == "running" ? DateTime.Now.Subtract(TimeSpan.FromMinutes(seed % 10 + 3)) : null,
+            FinishedAt = status == "running" ? null : finishTime,
             Project = GetMockProject()
         };
+    }
 }

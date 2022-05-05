@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace GitLabKit.Runner.Mock.Controllers;
 
 [ApiController]
-[Route("/runners/{runnerId:int}")]
+[Route("/api/v4/runners/{runnerId:int}")]
 public class RunnerController : ControllerBase
 {
     [HttpGet]
@@ -13,16 +13,25 @@ public class RunnerController : ControllerBase
         Generator.GetMockRunner(runnerId);
 
     [HttpGet("jobs")]
-    public ActionResult<IEnumerable<Job>> GetRunnerJobs([FromRoute] int runnerId, [FromQuery] string status)
+    public ActionResult<IEnumerable<Job>> GetRunnerJobs(
+        [FromRoute] int runnerId,
+        [FromQuery(Name = "status")] string? queryStatus,
+        [FromQuery] int? page)
     {
-        if (status != "running")
+        if (page > 1) return new List<Job>();
+
+        if (queryStatus != "running")
         {
-            return Enumerable.Range(201, 15)
+            var jobs = Enumerable.Range(201, 15)
                 .Select(id => Generator.GetMockJob(id, id % 7 == 0 ? "cancelled" : id % 5 == 0 ? "failed" : "success"))
                 .ToList();
+
+            if (IsARunningRunner(runnerId)) jobs.Add(Generator.GetMockJob(112, "running"));
+
+            return jobs;
         }
 
-        if (runnerId % 5 == 0)
+        if (queryStatus == "running" && IsARunningRunner(runnerId))
         {
             return new List<Job>
             {
@@ -50,4 +59,6 @@ public class RunnerController : ControllerBase
     {
         return Ok();
     }
+
+    private static bool IsARunningRunner(int runnerId) => runnerId % 5 == 0;
 }

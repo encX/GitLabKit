@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Serve &amp; Mock" type="CompoundRunConfigurationType">
+    <toRun name="GitLabKit.Runner.Mock: Mock" type="LaunchSettings" />
+    <toRun name="GitLabKit.Runner.Web: Dev" type="LaunchSettings" />
+    <method v="2" />
+  </configuration>
+</component>

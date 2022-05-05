@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace GitLabKit.Runner.Mock.Controllers;
 
 [ApiController]
-[Route("/groups/{groupId:int}")]
+[Route("/api/v4/groups/{groupId:int}")]
 public class GroupController : ControllerBase
 {
     [HttpGet]
@@ -19,8 +19,10 @@ public class GroupController : ControllerBase
     }
 
     [HttpGet("runners")]
-    public ActionResult<IEnumerable<Core.Models.Runner>> GetGroupRunners([FromRoute] int groupId)
+    public ActionResult<IEnumerable<Core.Models.Runner>> GetGroupRunners([FromRoute] int groupId, [FromQuery] int? page)
     {
-        return Enumerable.Range(2001, 20).Select(Generator.GetMockRunner).ToList();
+        return page > 1 
+            ? new List<Core.Models.Runner>() 
+            : Enumerable.Range(2001, 20).Select(Generator.GetMockRunner).ToList();
     }
 }

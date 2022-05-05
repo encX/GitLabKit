@@ -40,4 +40,9 @@ Global
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FF0A0519-A70F-45CD-B9BF-36F09DD3CF51}
 	EndGlobalSection
+	GlobalSection(RiderSharedRunConfigurations) = postSolution
+		File = .run\GitLabKit.Runner.Mock_ Mock.run.xml
+		File = .run\Serve & Mock.run.xml
+		File = .run\GitLabKit.Runner.Web_ Dev.run.xml
+	EndGlobalSection
 EndGlobal
