@@ -71,7 +71,7 @@ From group page, click on any runner name to see its job history.
 GitLabKit Runner Admin requires `redis` for caching result from GitLab server. This helps reduce loads to server and improve user experience.
 
 #### Run!
-GitLabKit Runner Admin is published as a docker image.
+GitLabKit Runner Admin is published as a [docker image](https://hub.docker.com/r/encx/gitlabkit-runner).
 
 You can try running by 2 docker commands
 ```shell
