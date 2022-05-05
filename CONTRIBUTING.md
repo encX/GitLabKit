@@ -1,4 +1,4 @@
-# How to contribute to GitLab Runner Admin?
+# How to contribute to GitLabKit Runner Admin?
 
 ## Dev environment setup
 ### Prerequiresite
@@ -18,16 +18,21 @@ Done!
 1. Provide GitLab token to the app by add file in project `GitLabKit.Runner.Web` called `appsettings.Secrets.json` with content.
 ```json
 {
+  "Connections": {
+    "GitLabServer": "https://<your-gitlab-server>"
+  },
   "Secrets": {
-    "GitLabToken": "place your gitlab token here"
+    "GitLabToken": "<your-gitlab-token>"
   }
 }
 ```
 This file will be ignored by git. 
 Make sure you have sufficient permission to get CI/CD settings for your group.
 Fail to provide valid API key will make API not able to fetch data from GitLab.
+(you can also store other settings you don't want to include in git too!, see `appsettings.json` for complete configs)
 
-Then, there's only 1 launch setting so start it and it will serve API on port `8888`
+Then, there's a launch setting called `Dev` for project `GitLabKit.Runner.Web`.
+Start it and API will be served on port `8888`
 
 #### Client
 1. Open `src/clientside` with JavaScript editor of choice
@@ -35,6 +40,24 @@ Then, there's only 1 launch setting so start it and it will serve API on port `8
 1. Run `yarn start` to start the dev website on port `3000`
 
 Then the clientside will forward API requests to `localhost:8888` automatically
+
+#### Mock GitLab server
+In case if you need to not connect to GitLab.
+You can run mock server by start the launch setting `Mock` for project `GitLabKit.Runner.Mock`.
+Mock will be served on port `9999` by default, you can change this in `launchSettings` if needed.
+
+Don't forget to change gitlab server settings in web project to call the mock.
+
+#### Docker
+As an alteranative to setup above, you can also run the project using predefined `docker-compose.yml` file. Update settings in `env` and just `docker-compose up`.
+This will build production-like image and stand everything up incluing mock.
+
+### Passing env to appsettings
+This project use .net env config provider.
+So everything you see in appsettings can be passed from env.
+But it requires double underscores for setting properties in objects.
+For example `{ foo: { bar: "value" } }` becomes `FOO__BAR=value`. 
+Read the [doc](https://docs.microsoft.com/en-us/dotnet/core/extensions/configuration-providers#environment-variable-configuration-provider) to learn more.
 
 ### How to make endpoint changes
 - Client code that fetch data from server side is generated using `openapi-generator`.

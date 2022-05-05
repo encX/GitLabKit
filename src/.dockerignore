@@ -20,3 +20,4 @@
 **/.toolstarget
 **/node_modules
 **/wwwroot
+**/appsettings.*.json
