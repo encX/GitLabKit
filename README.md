@@ -4,7 +4,12 @@
 ---
 
 ## Module: Runner Admin
-Better way to see and control your GitLab self-hosted runners.
+Better way to see and control your GitLab self-hosted runners.  
+
+##### Status
+![Image publish status](https://github.com/encX/GitLabKit/actions/workflows/runner-admin-publish.yml/badge.svg)
+![Dockerhub Image Version](https://img.shields.io/docker/v/encx/gitlabkit-runner?label=dockerhub)
+![Dockerhub Image Size](https://img.shields.io/docker/image-size/encx/gitlabkit-runner?label=img%20size)
 
 ### Why?
 Take a look at current GitLab runner page in group's CI/CD settings.  
