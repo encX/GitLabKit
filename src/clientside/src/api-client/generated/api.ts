@@ -245,7 +245,7 @@ export interface Runner {
      * @type {boolean}
      * @memberof Runner
      */
-    'online': boolean;
+    'online'?: boolean | null;
     /**
      * 
      * @type {string}
