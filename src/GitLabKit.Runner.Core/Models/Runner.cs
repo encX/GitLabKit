@@ -22,7 +22,7 @@ public class Runner
     public bool Active { get; set; }
 
     [JsonProperty("online")]
-    public bool Online { get; set; }
+    public bool? Online { get; set; }
     
     [JsonProperty("contacted_at")]
     public DateTime ContactedAt { get; set; }

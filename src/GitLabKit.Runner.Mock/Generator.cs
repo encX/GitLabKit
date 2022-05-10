@@ -18,7 +18,7 @@ public static class Generator
             Description = $"test-runner-{runnerId}",
             IpAddress = $"10.1.1.{runnerId % 255}",
             Active = runnerId % 7 != 0,
-            Online = runnerId % 15 != 0,
+            Online = runnerId % 15 != 0 ? true : runnerId % 16 != 0 ? null : false,
             ContactedAt = DateTime.Now,
             TagList = new List<string>{runnerId < 2010 ? "windows" : "linux", $"tag-{runnerId % 3 + 1}"}
         };
