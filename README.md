@@ -8,9 +8,9 @@
 Better way to see and control your GitLab self-hosted runners.  
 
 ##### Status
-![Image publish status](https://github.com/encX/GitLabKit/actions/workflows/runner-admin-publish.yml/badge.svg)
-![Dockerhub Image Version](https://img.shields.io/docker/v/encx/gitlabkit-runner?label=dockerhub)
-![Dockerhub Image Size](https://img.shields.io/docker/image-size/encx/gitlabkit-runner?label=img%20size)
+[![Image publish status](https://github.com/encX/GitLabKit/actions/workflows/runner-admin-publish.yml/badge.svg)](https://github.com/encX/GitLabKit/actions/workflows/runner-admin-publish.yml)
+[![Dockerhub Image Version](https://img.shields.io/docker/v/encx/gitlabkit-runner?label=dockerhub)](https://hub.docker.com/r/encx/gitlabkit-runner)
+[![Dockerhub Image Size](https://img.shields.io/docker/image-size/encx/gitlabkit-runner?label=img%20size)](https://hub.docker.com/r/encx/gitlabkit-runner)
 
 ### Why?
 Take a look at current GitLab runner page in group's CI/CD settings.  
