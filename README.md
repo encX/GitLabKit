@@ -1,5 +1,5 @@
-<h1 align="center">GitLabKit</h1>
 <p align="center"><img align="center" width=300 src="doc/images/gitlabkit-logo.png"></p>
+<h1 align="center">GitLabKit</h1>
 <p align="center">Toolkit for GitLab server admins and GitLab feature developers!</p>
 
 ---
