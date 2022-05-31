@@ -6,13 +6,7 @@ using StackExchange.Redis;
 
 namespace GitLabKit.Runner.Core.Repositories;
 
-public interface IRedisCache
-{
-    Task<T> GetCached<T>(string key, Func<Task<T>> dataFunc, TimeSpan ttl);
-    Task Delete(string key);
-}
-
-public class RedisCache : IRedisCache
+public class RedisCache : ICache
 {
     private readonly IConnectionMultiplexer _redis;
 
