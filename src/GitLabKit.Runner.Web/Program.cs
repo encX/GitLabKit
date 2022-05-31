@@ -45,17 +45,25 @@ builder.Services.AddSwaggerGen(c =>
 var connectionsConfig = configuration.GetSection(nameof(Connections));
 builder.Services.Configure<Connections>(connectionsConfig);
 builder.Services.Configure<ApplicationInsights>(configuration.GetSection(nameof(ApplicationInsights)));
-builder.Services.Configure<Secrets>(configuration.GetSection(nameof(Secrets)));
+
+var secretsConfig = configuration.GetSection(nameof(Secrets));
+builder.Services.Configure<Secrets>(secretsConfig);
 
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddApplicationInsightsTelemetry().EnrichAppInsightsData();
 builder.Services.AddSingleton<ITelemetryInitializer, ApplicationInsightsRoleNameInitializer>();
-builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(connectionsConfig.GetSection("RedisServer").Value,
+builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(connectionsConfig.GetValue<string>("RedisServer"),
     options =>
     {
         options.AbortOnConnectFail = false;
         options.ConnectTimeout = 1000;
+        
+        var user = secretsConfig.GetValue<string>("RedisUser");
+        var password = secretsConfig.GetValue<string>("RedisPassword");
+
+        if (!string.IsNullOrEmpty(user)) options.User = user;
+        if (!string.IsNullOrEmpty(password)) options.Password = password;
     }));
 
 builder.Services.AddSingleton<IRedisCache, RedisCache>();
