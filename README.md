@@ -120,8 +120,10 @@ Settings could be passed to Runner Admin's container using these environment var
 | variable | example | required | description |
 |---|---|---|---|
 | `CONNECTIONS__GITLABSERVER` | `https://gitlab.yourcompany.com` | yes | GitLab server URL |
-| `CONNECTIONS__REDISSERVER` | `redis-server:16379` | yes | Redis host |
 | `SECRETS__GITLABTOKEN` | `rG2f93ddaz` | yes | GitLab token. Could be a personal token or group token that has sufficient permission to view CI/CD settings in the group |
+| `CONNECTIONS__REDISSERVER` | `redis-server:16379` | no | Redis host. If set, it will be used as cache. |
+| `SECRETS__REDISUSER` | `username` | no | Redis ACL user. Leave empty if Redis has no ACL user set. |
+| `SECRETS__REDISPASSWORD` | `password` | no | Redis password. Could be used alone if Redis has set `requirepass`. Or could be used together with `SECRETS__REDISUSER` for ACL authentication. |
 | `LOGTARGETS__SEQ` | `http://seq-server:5341` | no | Runner Admin supports [Seq](https://datalust.co/seq) logger. Use this to set log ingestion URL. |
 | `APPLICATIONINSIGHTS__CONNECTIONSTRING` | - | no | Runner Admin supports [Application Insights](https://docs.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview) to see application diagnostics. Use this to set connection string from Azure dashboard. |
 
