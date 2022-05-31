@@ -34,6 +34,7 @@ GitLabKit Runner Admin can help improve experience of managing runners.
 ### How?
 #### Main page
 Put your group ID in text box and hit enter to go to group page. Simple enough.
+
 ![main-page](/doc/images/main-page.png)
 
 #### Group page
@@ -43,6 +44,7 @@ Displays all runners in the group
 - Use the toggle in front of runner name to individually enable/disable it
 - Click on job name on the right to navigate back to job page on GitLab
 - Click on runner name for runner history page
+
 ![group-page](/doc/images/group-page.png)
 
 ##### Filters!
