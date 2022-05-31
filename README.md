@@ -75,11 +75,6 @@ From group page, click on any runner name to see its job history.
 
 
 ### Installation
-#### Prerequiresite
-GitLabKit Runner Admin requires `redis` for caching result from GitLab server.  
-This helps reduce loads to server and improve user experience.
-
-#### Run!
 GitLabKit Runner Admin is published as a [docker image](https://hub.docker.com/r/encx/gitlabkit-runner).
 
 You can try running by using `docker run`
@@ -87,7 +82,6 @@ You can try running by using `docker run`
 $ docker run \
   -e CONNECTIONS__GITLABSERVER="https://<your-gitlab-server>" \
   -e SECRETS__GITLABTOKEN="<gitlab-token>" \
-  -e CONNECTIONS__REDISSERVER="<redis-host>" \
   -p 80:80 \
   encx/gitlabkit-runner
 ```
@@ -102,13 +96,8 @@ services:
     environment:
       - CONNECTIONS__GITLABSERVER="https://<your-gitlab-server>"
       - SECRETS__GITLABTOKEN="<gitlab-token>"
-      - CONNECTIONS__REDISSERVER="redis:6379"
       - ASPNETCORE_URLS=http://+:80
     ports: ["80:80"]
-
-  redis:
-    image: redis
-    ports: [6379]
 ```
 
 of course, you could also run this in Kubernetes environment and have multiple pods of it since the Runner Admin doesn't hold any state.
