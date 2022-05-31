@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -13,7 +12,6 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;
 using Nelibur.ObjectMapper;
 using Newtonsoft.Json;
-using Serilog;
 
 namespace GitLabKit.Runner.Core.Repositories;
 
@@ -31,7 +29,7 @@ public interface IGitLabRepository
 
 public class GitLabRepository : IGitLabRepository
 {
-    private readonly IRedisCache _redis;
+    private readonly ICache _cache;
     private readonly IGitLabClient _gitLabClient;
     private readonly HttpClient _gitLabHttpClient = new();
 
@@ -39,9 +37,9 @@ public class GitLabRepository : IGitLabRepository
     private static string GroupInfoCacheKey(int id) => $"group_{id}_info";
     private static string RunnerCacheKey(int id) => $"runner_{id}";
 
-    public GitLabRepository(IOptions<Secrets> secretsOptions, IOptions<Connections> connectionOptions, IRedisCache redis)
+    public GitLabRepository(IOptions<Secrets> secretsOptions, IOptions<Connections> connectionOptions, ICache cache)
     {
-        _redis = redis;
+        _cache = cache;
         _gitLabHttpClient.BaseAddress = new Uri($"{connectionOptions.Value.GitLabServer}/api/v4/");
         _gitLabHttpClient.DefaultRequestHeaders.Add("PRIVATE-TOKEN", secretsOptions.Value.GitLabToken);
         _gitLabClient = new GitLabClient(connectionOptions.Value.GitLabServer, secretsOptions.Value.GitLabToken);
@@ -51,7 +49,7 @@ public class GitLabRepository : IGitLabRepository
     {
         var dataFunc = () => _gitLabClient.Groups.GetAsync(groupId);
 
-        var groupInfo = await _redis.GetCached(GroupInfoCacheKey(groupId), dataFunc, TimeSpan.FromDays(1));
+        var groupInfo = await _cache.GetCached(GroupInfoCacheKey(groupId), dataFunc, TimeSpan.FromDays(1));
 
         return TinyMapper.Map<Group>(groupInfo);
     }
@@ -62,7 +60,7 @@ public class GitLabRepository : IGitLabRepository
             $"groups/{groupId}/runners?type=group_type",
             new Dictionary<string, string>());
 
-        var runners = await _redis.GetCached(GroupRunnerListCacheKey(groupId), dataFunc, TimeSpan.FromMinutes(1));
+        var runners = await _cache.GetCached(GroupRunnerListCacheKey(groupId), dataFunc, TimeSpan.FromMinutes(1));
 
         return runners;
     }
@@ -70,7 +68,7 @@ public class GitLabRepository : IGitLabRepository
     public async Task<Models.Runner> GetSingleRunner(int runnerId)
     {
         var dataFunc = () => _gitLabClient.Runners.GetAsync(runnerId);
-        var runner = await _redis.GetCached(RunnerCacheKey(runnerId), dataFunc, TimeSpan.FromMinutes(1));
+        var runner = await _cache.GetCached(RunnerCacheKey(runnerId), dataFunc, TimeSpan.FromMinutes(1));
         return TinyMapper.Map<Models.Runner>(runner);
     }
 
@@ -80,7 +78,7 @@ public class GitLabRepository : IGitLabRepository
             $"runners/{runnerId}/jobs",
             new Dictionary<string, string> {{"status", "running"}});
 
-        var jobs = await _redis.GetCached($"runner_{runnerId}_currentjob", dataFunc, TimeSpan.FromMinutes(1));
+        var jobs = await _cache.GetCached($"runner_{runnerId}_currentjob", dataFunc, TimeSpan.FromMinutes(1));
         
         return jobs;
     }
@@ -91,14 +89,14 @@ public class GitLabRepository : IGitLabRepository
             $"runners/{runnerId}/jobs",
             new Dictionary<string, string>());
 
-        var jobs = await _redis.GetCached($"runner_{runnerId}_alljob", dataFunc, TimeSpan.FromMinutes(1));
+        var jobs = await _cache.GetCached($"runner_{runnerId}_alljob", dataFunc, TimeSpan.FromMinutes(1));
 
         return jobs;
     }
     
     public async Task InvalidateRunnerCache(int runnerId)
     {
-        await _redis.Delete(RunnerCacheKey(runnerId));
+        await _cache.Delete(RunnerCacheKey(runnerId));
     }
 
     public async Task<bool> SetRunnerActiveStatus(int runnerId, bool isActive)

@@ -8,8 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Serilog; 
-using StackExchange.Redis;
+using Serilog;
 using Swashbuckle.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -53,20 +52,7 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddApplicationInsightsTelemetry().EnrichAppInsightsData();
 builder.Services.AddSingleton<ITelemetryInitializer, ApplicationInsightsRoleNameInitializer>();
-builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(connectionsConfig.GetValue<string>("RedisServer"),
-    options =>
-    {
-        options.AbortOnConnectFail = false;
-        options.ConnectTimeout = 1000;
-        
-        var user = secretsConfig.GetValue<string>("RedisUser");
-        var password = secretsConfig.GetValue<string>("RedisPassword");
-
-        if (!string.IsNullOrEmpty(user)) options.User = user;
-        if (!string.IsNullOrEmpty(password)) options.Password = password;
-    }));
-
-builder.Services.AddSingleton<IRedisCache, RedisCache>();
+builder.Services.AddCache(connectionsConfig, secretsConfig);
 builder.Services.AddSingleton<IGitLabRepository, GitLabRepository>();
 builder.Services.AddSingleton<IGitLabGroupService, GitLabGroupService>();
 builder.Services.AddSingleton<IGitLabRunnerService, GitLabRunnerService>();
