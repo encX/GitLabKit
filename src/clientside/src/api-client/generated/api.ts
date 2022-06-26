@@ -281,7 +281,7 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
         getGroup: async (groupId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'groupId' is not null or undefined
             assertParamExists('getGroup', 'groupId', groupId)
-            const localVarPath = `/group/{groupId}`
+            const localVarPath = `/api/group/{groupId}`
                 .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -379,7 +379,7 @@ export const HealthCheckApiAxiosParamCreator = function (configuration?: Configu
          * @throws {RequiredError}
          */
         getVersion: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/version`;
+            const localVarPath = `/api/version`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -530,7 +530,7 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
          * @throws {RequiredError}
          */
         bulkDeleteRunner: async (bulkRunnerDelete?: BulkRunnerDelete, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/runner/bulk-delete`;
+            const localVarPath = `/api/runner/bulk-delete`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -563,7 +563,7 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
          * @throws {RequiredError}
          */
         bulkSetRunnerActiveStatus: async (bulkRunnerActiveStatus?: BulkRunnerActiveStatus, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/runner/bulk`;
+            const localVarPath = `/api/runner/bulk`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -598,7 +598,7 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
         deleteRunner: async (runnerId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'runnerId' is not null or undefined
             assertParamExists('deleteRunner', 'runnerId', runnerId)
-            const localVarPath = `/runner/{runnerId}`
+            const localVarPath = `/api/runner/{runnerId}`
                 .replace(`{${"runnerId"}}`, encodeURIComponent(String(runnerId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -631,7 +631,7 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
         getGroupRunners: async (groupId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'groupId' is not null or undefined
             assertParamExists('getGroupRunners', 'groupId', groupId)
-            const localVarPath = `/runner/group/{groupId}`
+            const localVarPath = `/api/runner/group/{groupId}`
                 .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -664,7 +664,7 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
         getRunnerJobHistory: async (runnerId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'runnerId' is not null or undefined
             assertParamExists('getRunnerJobHistory', 'runnerId', runnerId)
-            const localVarPath = `/runner/{runnerId}/history`
+            const localVarPath = `/api/runner/{runnerId}/history`
                 .replace(`{${"runnerId"}}`, encodeURIComponent(String(runnerId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -697,7 +697,7 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
         getSingleRunner: async (runnerId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'runnerId' is not null or undefined
             assertParamExists('getSingleRunner', 'runnerId', runnerId)
-            const localVarPath = `/runner/{runnerId}`
+            const localVarPath = `/api/runner/{runnerId}`
                 .replace(`{${"runnerId"}}`, encodeURIComponent(String(runnerId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -731,7 +731,7 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
         setRunnerActiveStatus: async (runnerId: number, body?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'runnerId' is not null or undefined
             assertParamExists('setRunnerActiveStatus', 'runnerId', runnerId)
-            const localVarPath = `/runner/{runnerId}`
+            const localVarPath = `/api/runner/{runnerId}`
                 .replace(`{${"runnerId"}}`, encodeURIComponent(String(runnerId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

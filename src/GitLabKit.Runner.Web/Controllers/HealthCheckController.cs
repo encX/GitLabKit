@@ -10,7 +10,7 @@ public class HealthCheckController : ControllerBase
 {
     private static readonly AssemblyInfo AssemblyInfo = new AssemblyInfo();
         
-    [Route("api/health")]
+    [Route("/api/health")]
     [HttpGet]
     [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(bool))]
     [SwaggerOperation(OperationId = "index")]
@@ -19,7 +19,7 @@ public class HealthCheckController : ControllerBase
         return Ok();
     }
         
-    [Route("/version")]
+    [Route("/api/version")]
     [HttpGet]
     [Produces("application/json")]
     [ProducesResponseType(typeof(AssemblyInfo), StatusCodes.Status200OK)]

@@ -13,7 +13,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace GitLabKit.Runner.Web.Controllers;
 
 [ApiController]
-[Route("runner")]
+[Route("/api/runner")]
 [Produces("application/json")]
 public class RunnerController : ControllerBase
 {
