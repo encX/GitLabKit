@@ -40,7 +40,6 @@ jobs:
           type=semver,pattern={{major}}.{{minor}}
           type=semver,pattern={{major}}
           type=ref,event=pr
-          type=sha
         labels: |
           org.opencontainers.image.title=GitLabKit Runner
           org.opencontainers.image.description=Tools for GitLab to help you visualize and manage self-hosted runners with ease
