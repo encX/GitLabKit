@@ -10,7 +10,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace GitLabKit.Runner.Web.Controllers;
 
 [ApiController]
-[Route("group")]
+[Route("/api/group")]
 [Produces("application/json")]
 public class GroupController : ControllerBase
 {
