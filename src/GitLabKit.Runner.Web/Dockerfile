@@ -14,9 +14,9 @@ RUN dotnet publish "GitLabKit.Runner.Web.csproj" -c Release -o /app
 FROM node:16-alpine AS build-client
 WORKDIR /client
 COPY clientside/package.json clientside/yarn.lock ./
-RUN yarn
+RUN npm i
 COPY clientside ./
-RUN yarn build
+RUN npm run build
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS final
 WORKDIR /app
